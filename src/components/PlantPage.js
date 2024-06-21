@@ -42,7 +42,11 @@ function PlantPage() {
     <main>
       <NewPlantForm addNewPlants={onNewPlantSubmit} />
       <Search plants={plants} search={search} onSearch={handleSearchInput} />
-      <PlantList plants={plants} onSearchForPlants={onSearchForPlants} />
+      <PlantList
+        plants={plants}
+        setPlants={setPlants}
+        onSearchForPlants={onSearchForPlants}
+      />
     </main>
   )
 }
