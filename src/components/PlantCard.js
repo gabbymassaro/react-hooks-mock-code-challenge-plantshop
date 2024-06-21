@@ -42,29 +42,34 @@ function PlantCard({ plants, setPlants, id, name, image, price }) {
   return (
     <>
       <li className="card">
-        <img src={image} alt={name} />
-        <h4>{name}</h4>
-        <p>Price: {price}</p>
-        {isInStock === true ? (
-          <button className="primary" onClick={handleInStockClick}>
-            In Stock
+        <div className="card-container">
+          <button>X</button>
+          <img src={image} alt={name} />
+          <h4>{name}</h4>
+          <p>Price: {price}</p>
+          {isInStock === true ? (
+            <button className="primary" onClick={handleInStockClick}>
+              In Stock
+            </button>
+          ) : (
+            <button onClick={handleInStockClick}>Out of Stock</button>
+          )}
+          <button className="secondary" onClick={showUpdatePriceForm}>
+            Update Price
           </button>
-        ) : (
-          <button onClick={handleInStockClick}>Out of Stock</button>
-        )}
-        <button className="secondary" onClick={showUpdatePriceForm}>
-          Update Price
-        </button>
+        </div>
       </li>
       {showForm && (
-        <form className="update-price-form" onSubmit={onSubmitPrice}>
-          <label htmlFor="price">New Price</label>
-          <br />
-          <input type="text" id="price" onChange={handleChangePrice} />
-          <button type="submit" value="Submit">
-            Submit
-          </button>
-        </form>
+        <div className="form-container">
+          <form onSubmit={onSubmitPrice}>
+            <label htmlFor="price">New Price</label>
+            <br />
+            <input type="text" id="price" onChange={handleChangePrice} />
+            <button type="submit" value="Submit">
+              Submit
+            </button>
+          </form>
+        </div>
       )}
     </>
   )
