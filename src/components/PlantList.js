@@ -1,7 +1,7 @@
 import React from "react"
 import PlantCard from "./PlantCard"
 
-function PlantList({ plants, setPlants, onSearchForPlants }) {
+function PlantList({ plants, setPlants, onSearchForPlants, onHandleDelete }) {
   const renderPlantList =
     onSearchForPlants.length > 0 ? onSearchForPlants : plants
   return (
@@ -15,6 +15,7 @@ function PlantList({ plants, setPlants, onSearchForPlants }) {
           price={plant.price}
           setPlants={setPlants}
           plants={plants}
+          onDeleteItem={onHandleDelete}
         />
       ))}
     </ul>

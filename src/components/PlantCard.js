@@ -1,6 +1,14 @@
 import React, { useState } from "react"
 
-function PlantCard({ plants, setPlants, id, name, image, price }) {
+function PlantCard({
+  plants,
+  setPlants,
+  id,
+  name,
+  image,
+  price,
+  onDeleteItem,
+}) {
   const [isInStock, setIsInStock] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [newPrice, setNewPrice] = useState(0)
@@ -39,11 +47,19 @@ function PlantCard({ plants, setPlants, id, name, image, price }) {
       .then((data) => updatePrice(data))
   }
 
+  function handleDeleteClick() {
+    fetch(`http://localhost:4000/plants/${id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(() => onDeleteItem(id))
+  }
+
   return (
     <>
       <li className="card">
         <div className="card-container">
-          <button>X</button>
+          <button onClick={handleDeleteClick}>X</button>
           <img src={image} alt={name} />
           <h4>{name}</h4>
           <p>Price: {price}</p>
