@@ -29,11 +29,7 @@ function PlantPage() {
 
   return (
     <main>
-      <NewPlantForm
-        plants={plants}
-        setPlants={setPlants}
-        addNewPlants={onNewPlantSubmit}
-      />
+      <NewPlantForm addNewPlants={onNewPlantSubmit} />
       <Search />
       <PlantList plants={plants} />
     </main>
