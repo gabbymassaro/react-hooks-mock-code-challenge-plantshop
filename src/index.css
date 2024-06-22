@@ -115,10 +115,21 @@ input:focus {
 
 .card-container {
   max-width: 400px;
+  position: relative;
 }
 
-.form-container {
-  max-width: 400px;
+.delete {
+  background-color: lightgrey;
+  position: absolute;
+  left: 5px;
+}
+
+.update-price-form {
+  background-color: white;
+}
+
+.update-price-input {
+  background-color: white;
 }
 
 @media (min-width: 768px) {

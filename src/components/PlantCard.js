@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 
 function PlantCard({
   plants,
@@ -12,6 +12,7 @@ function PlantCard({
   const [isInStock, setIsInStock] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [newPrice, setNewPrice] = useState(0)
+  const formRef = useRef(null)
 
   function handleInStockClick() {
     setIsInStock((isInStock) => !isInStock)
@@ -44,7 +45,13 @@ function PlantCard({
       }),
     })
       .then((response) => response.json())
-      .then((data) => updatePrice(data))
+      .then((data) => {
+        updatePrice(data)
+        if (formRef.current) {
+          formRef.current.reset()
+        }
+        setShowForm(false)
+      })
   }
 
   function handleDeleteClick() {
@@ -59,7 +66,9 @@ function PlantCard({
     <>
       <li className="card">
         <div className="card-container">
-          <button onClick={handleDeleteClick}>X</button>
+          <button className="delete" onClick={handleDeleteClick}>
+            X
+          </button>
           <img src={image} alt={name} />
           <h4>{name}</h4>
           <p>Price: {price}</p>
@@ -73,20 +82,25 @@ function PlantCard({
           <button className="secondary" onClick={showUpdatePriceForm}>
             Update Price
           </button>
+          {showForm && (
+            <div className="update-price-form">
+              <form onSubmit={onSubmitPrice} ref={formRef}>
+                <label htmlFor="price">New Price</label>
+                <br />
+                <input
+                  className="update-price-input"
+                  type="text"
+                  id="price"
+                  onChange={handleChangePrice}
+                />
+                <button type="submit" value="Submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       </li>
-      {showForm && (
-        <div className="form-container">
-          <form onSubmit={onSubmitPrice}>
-            <label htmlFor="price">New Price</label>
-            <br />
-            <input type="text" id="price" onChange={handleChangePrice} />
-            <button type="submit" value="Submit">
-              Submit
-            </button>
-          </form>
-        </div>
-      )}
     </>
   )
 }
