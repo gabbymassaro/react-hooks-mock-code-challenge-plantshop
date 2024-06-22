@@ -48,7 +48,7 @@ function PlantCard({
   }
 
   function handleDeleteClick() {
-    fetch(`http://localhost:4000/plants/${id}`, {
+    fetch(`http://localhost:6001/plants/${id}`, {
       method: "DELETE",
     })
       .then((r) => r.json())
