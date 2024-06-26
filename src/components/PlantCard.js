@@ -1,17 +1,13 @@
 import React, { useRef, useState } from "react"
 import DeleteButton from "./DeleteButton"
+import InStockButton from "./InStockButton"
 
 function PlantCard({ plants, setPlants, plant, onDeleteItem }) {
-  const { id, name, image, price } = plant
-
+  const { id } = plant
   const [isInStock, setIsInStock] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [newPrice, setNewPrice] = useState(0)
   const formRef = useRef(null)
-
-  function handleInStockClick() {
-    setIsInStock((isInStock) => !isInStock)
-  }
 
   const showUpdatePriceForm = () => {
     setShowForm(!showForm)
@@ -54,13 +50,7 @@ function PlantCard({ plants, setPlants, plant, onDeleteItem }) {
       <li className="card">
         <div className="card-container">
           <DeleteButton onDeleteItem={onDeleteItem} plant={plant} />
-          {isInStock === true ? (
-            <button className="primary" onClick={handleInStockClick}>
-              In Stock
-            </button>
-          ) : (
-            <button onClick={handleInStockClick}>Out of Stock</button>
-          )}
+          <InStockButton isInStock={isInStock} setIsInStock={setIsInStock} />
           <button className="secondary" onClick={showUpdatePriceForm}>
             Update Price
           </button>
