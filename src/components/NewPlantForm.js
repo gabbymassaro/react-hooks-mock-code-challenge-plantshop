@@ -1,9 +1,7 @@
 import React, { useState } from "react"
-import { v4 as uuid } from "uuid"
 
 function NewPlantForm({ addNewPlants }) {
   const [formInput, setFormInput] = useState({
-    id: uuid(),
     name: "",
     image: "",
     price: "",

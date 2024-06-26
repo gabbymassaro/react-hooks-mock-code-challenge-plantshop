@@ -1,14 +1,9 @@
 import React, { useRef, useState } from "react"
+import DeleteButton from "./DeleteButton"
 
-function PlantCard({
-  plants,
-  setPlants,
-  id,
-  name,
-  image,
-  price,
-  onDeleteItem,
-}) {
+function PlantCard({ plants, setPlants, plant, onDeleteItem }) {
+  const { id, name, image, price } = plant
+
   const [isInStock, setIsInStock] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [newPrice, setNewPrice] = useState(0)
@@ -54,24 +49,11 @@ function PlantCard({
       })
   }
 
-  function handleDeleteClick() {
-    fetch(`http://localhost:6001/plants/${id}`, {
-      method: "DELETE",
-    })
-      .then((r) => r.json())
-      .then(() => onDeleteItem(id))
-  }
-
   return (
     <>
       <li className="card">
         <div className="card-container">
-          <button className="delete" onClick={handleDeleteClick}>
-            X
-          </button>
-          <img src={image} alt={name} />
-          <h4>{name}</h4>
-          <p>Price: {price}</p>
+          <DeleteButton onDeleteItem={onDeleteItem} plant={plant} />
           {isInStock === true ? (
             <button className="primary" onClick={handleInStockClick}>
               In Stock
