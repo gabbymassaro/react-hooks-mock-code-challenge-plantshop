@@ -1,4 +1,5 @@
 import React from "react"
+import InStock from "./InStock"
 
 function PlantCard({ plant }) {
   const { id, name, image, price } = plant
@@ -8,11 +9,7 @@ function PlantCard({ plant }) {
       <img src={image} alt={name} />
       <h4>{name}</h4>
       <p>Price: {price}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+      <InStock id={id} />
     </li>
   )
 }
