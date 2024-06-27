@@ -12,7 +12,7 @@ function Search({ setSearch }) {
         type="text"
         id="search"
         placeholder="Type a name to search..."
-        onChange={(event) => handleSearch(event)}
+        onChange={handleSearch}
       />
     </div>
   )
