@@ -3,7 +3,7 @@ import InStock from "./InStock"
 import Delete from "./Delete"
 import UpdatePrice from "./UpdatePrice"
 
-function PlantCard({ plant, onDelete }) {
+function PlantCard({ plant, onDelete, updatePrice }) {
   const { id, name, image, price } = plant
 
   return (
@@ -13,7 +13,7 @@ function PlantCard({ plant, onDelete }) {
       <h4>{name}</h4>
       <p>Price: {price}</p>
       <InStock id={id} />
-      <UpdatePrice />
+      <UpdatePrice updatePrice={updatePrice} id={id} price={price} />
     </li>
   )
 }
