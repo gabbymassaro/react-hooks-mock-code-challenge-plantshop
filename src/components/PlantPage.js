@@ -7,6 +7,7 @@ import Sort from "./Sort"
 function PlantPage() {
   const [plants, setPlants] = useState([])
   const [search, setSearch] = useState("")
+  const [sort, setSort] = useState(null)
   const [fetchTrigger, setFetchTrigger] = useState(false)
 
   const toggleFetchTrigger = () => setFetchTrigger(!fetchTrigger)
@@ -23,11 +24,12 @@ function PlantPage() {
       .then((data) => setPlants(data))
   }, [fetchTrigger])
 
+  console.log(sort)
   return (
     <main>
       <NewPlantForm onAddPlant={toggleFetchTrigger} />
       <Search setSearch={setSearch} />
-      <Sort plants={plants} />
+      <Sort plants={plants} setSort={setSort} />
       <PlantList
         plants={onSearchForPlants}
         onDelete={toggleFetchTrigger}
