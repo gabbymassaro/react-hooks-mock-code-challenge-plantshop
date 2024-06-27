@@ -7,15 +7,25 @@ import Sort from "./Sort"
 function PlantPage() {
   const [plants, setPlants] = useState([])
   const [search, setSearch] = useState("")
-  const [sort, setSort] = useState(null)
+  const [sort, setSort] = useState("")
   const [fetchTrigger, setFetchTrigger] = useState(false)
 
   const toggleFetchTrigger = () => setFetchTrigger(!fetchTrigger)
 
-  const onSearchForPlants = plants.filter((plant) => {
+  const filteredPlants = plants.filter((plant) => {
     if (search === "") return true
 
     return plant.name.toLowerCase().includes(search.toLowerCase())
+  })
+
+  const sortedAndFilteredPlants = filteredPlants.slice().sort((a, b) => {
+    if (sort === "asc") {
+      return a.name.localeCompare(b.name)
+    } else if (sort === "desc") {
+      return b.name.localeCompare(a.name)
+    } else {
+      return 0
+    }
   })
 
   useEffect(() => {
@@ -24,14 +34,13 @@ function PlantPage() {
       .then((data) => setPlants(data))
   }, [fetchTrigger])
 
-  console.log(sort)
   return (
     <main>
       <NewPlantForm onAddPlant={toggleFetchTrigger} />
       <Search setSearch={setSearch} />
-      <Sort plants={plants} setSort={setSort} />
+      <Sort setSort={setSort} />
       <PlantList
-        plants={onSearchForPlants}
+        plants={sortedAndFilteredPlants}
         onDelete={toggleFetchTrigger}
         handleUpdate={toggleFetchTrigger}
       />
