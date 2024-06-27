@@ -9,7 +9,7 @@ function Sort({ plants }) {
           <option value=""></option>
           {plants.map((plant) => (
             <option value="name" key={plant.id}>
-              {plant.name}
+              ${plant.price}
             </option>
           ))}
         </select>
