@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import NewPlantForm from "./NewPlantForm"
 import PlantList from "./PlantList"
 import Search from "./Search"
+import Sort from "./Sort"
 
 function PlantPage() {
   const [plants, setPlants] = useState([])
@@ -26,6 +27,7 @@ function PlantPage() {
     <main>
       <NewPlantForm onAddPlant={toggleFetchTrigger} />
       <Search setSearch={setSearch} />
+      <Sort plants={plants} />
       <PlantList
         plants={onSearchForPlants}
         onDelete={toggleFetchTrigger}
