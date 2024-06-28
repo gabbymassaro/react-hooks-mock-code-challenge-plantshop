@@ -17,7 +17,7 @@ function PlantPage() {
 
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm onAddPlant={toggleFetchTrigger} />
       <Search />
       <PlantList plants={plants} />
     </main>
